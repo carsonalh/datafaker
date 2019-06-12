@@ -76,7 +76,7 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
         c.insets = new Insets(10, 10, 10, 10);
 
         // COLUMN 1
-        c.anchor = GridBagConstraints.BASELINE_TRAILING;
+        c.anchor = GridBagConstraints.BASELINE_LEADING;
 
         // Count Label
         c.gridx = 0;
@@ -116,6 +116,7 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
 
         // COLUMN 2
         c.anchor = GridBagConstraints.BASELINE_LEADING;
+        c.fill = GridBagConstraints.HORIZONTAL;
 
         // Count Spinner
         c.gridx = 1;

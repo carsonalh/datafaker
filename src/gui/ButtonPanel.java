@@ -34,6 +34,9 @@ public class ButtonPanel extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+        c.insets = new Insets(10, 10, 10, 10);
+        c.fill = GridBagConstraints.HORIZONTAL;
+
         // Reseed
         c.gridx = 0;
         c.gridy = 0;

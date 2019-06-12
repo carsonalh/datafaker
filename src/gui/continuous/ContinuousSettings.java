@@ -82,13 +82,14 @@ public class ContinuousSettings extends JPanel {
         // Layout
         setLayout(new GridBagLayout());
 
+        // GLOBAL CONSTRAINTS
         GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 1;
         c.weighty = 1;
         c.insets = new Insets(10, 10, 10, 10);
 
         // FIRST COLUMN
-        c.anchor = GridBagConstraints.BASELINE_TRAILING;
+        c.anchor = GridBagConstraints.BASELINE_LEADING;
+        c.weightx = 1;
 
         // Function Label
         c.gridx = 0;
@@ -146,6 +147,8 @@ public class ContinuousSettings extends JPanel {
 
         // SECOND COLUMN
         c.anchor = GridBagConstraints.BASELINE_LEADING;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1;
 
         // Function Field
         c.gridx = 1;

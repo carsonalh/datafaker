@@ -44,19 +44,31 @@ public class MainPanel extends DataTab {
 
         c.gridx = 0;
         c.gridy = 0;
+        c.gridheight = 1;
+        c.gridwidth = 1;
         c.weightx = 1;
+        c.weighty = 2;
+        c.anchor = GridBagConstraints.SOUTH;
 
         add(settingsForm, c);
 
         c.gridx = 1;
         c.gridy = 0;
-        c.weightx = 3;
+        c.gridheight = 2;
+        c.gridwidth = 1;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.anchor = GridBagConstraints.CENTER;
 
         add(graphPanel, c);
 
-        c.gridx = 2;
-        c.gridy = 0;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridheight = 1;
+        c.gridwidth = 1;
         c.weightx = 1;
+        c.weighty = 1;
+        c.anchor = GridBagConstraints.NORTH;
 
         add(buttonPanel, c);
 
