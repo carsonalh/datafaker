@@ -66,6 +66,10 @@ public class MainPanel extends DataTab {
         generator.setCenter(data.center);
         generator.setCount(data.count);
 
+        double rangeEnd = data.rangeStart + (data.rangeCount + 1) * data.rangeStride;
+
+        settingsForm.setCenterRange(data.rangeStart - data.sigmaX, rangeEnd + data.sigmaX);
+
         this.data = generator.genData();
         discreteGraph.setData(this.data);
     }

@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData> {
 
+    private static final int SPINNER_WIDTH = 200;
+
     private final JLabel countLabel;
     private final JLabel rangeCountLabel;
     private final JLabel rangeStrideLabel;
@@ -157,6 +159,18 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
 
         for (Listener<SettingsData> l : listeners)
             l.onSubmit(data);
+    }
+
+    public void setCenterRange(double start, double end) {
+        if (end < start)
+            return;
+
+        double center = (Double) centerSpinner.getValue();
+
+        if (!(start <= center && center <= end))
+            center = start;
+
+        centerSpinner.setModel(new SpinnerNumberModel(center, start, end, 0.1));
     }
 
     public void addListener(Listener<SettingsData> l) {

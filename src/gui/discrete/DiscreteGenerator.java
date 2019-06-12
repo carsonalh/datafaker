@@ -29,7 +29,7 @@ public class DiscreteGenerator extends DataGenerator<Double> {
 
     public Double[][] genData() {
         data = new Double[rangeCount][2];
-        double rangeEnd = rangeStart + (rangeCount + 1) * rangeStride;
+        double rangeEnd = getRangeEnd();
 
         for (int i = 0; i < rangeCount; i++) {
             data[i][0] = (rangeStart + i * rangeStride);
@@ -63,6 +63,10 @@ public class DiscreteGenerator extends DataGenerator<Double> {
         }
 
         return data;
+    }
+
+    public double getRangeEnd() {
+        return rangeStart + (rangeCount + 1) * rangeStride;
     }
 
     public int getCount() {
