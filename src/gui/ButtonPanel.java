@@ -74,4 +74,8 @@ public class ButtonPanel extends JPanel {
         reseedListeners.add(l);
     }
 
+    public void addMoreOptionsListener(Listener<Void> l) {
+        moreOptionsListeners.add(l);
+    }
+
 }

@@ -4,6 +4,7 @@ import function.FunctionLoader;
 import function.TrendFunction;
 import gui.ButtonPanel;
 import gui.DataTab;
+import gui.MoreOptionsFrame;
 import net.objecthunter.exp4j.tokenizer.UnknownFunctionOrVariableException;
 
 import javax.swing.*;
@@ -35,6 +36,7 @@ public class MainPanel extends DataTab {
         settingsForm.addListener(this::updateGraph);
         buttonPanel.addSaveListener(data -> saveData());
         buttonPanel.addReseedListener(data -> reseedData());
+        buttonPanel.addMoreOptionsListener(data -> openMoreOptionsFrame());
 
         graphPanel.setBorder(BorderFactory.createEtchedBorder());
 
@@ -118,6 +120,10 @@ public class MainPanel extends DataTab {
     public void reseedData() {
         ContinuousSettings.SettingsData settings = settingsForm.getData();
         updateGraph(settings);
+    }
+
+    private void openMoreOptionsFrame() {
+        MoreOptionsFrame optionsFrame = new MoreOptionsFrame();
     }
 
 }
