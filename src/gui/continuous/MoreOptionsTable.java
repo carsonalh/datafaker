@@ -59,6 +59,22 @@ public class MoreOptionsTable extends JTable {
         return displayData;
     }
 
+    public ContinuousOptions getOptions() {
+        ContinuousOptions options = new ContinuousOptions();
+        TableModel model = getModel();
+
+        options.function = (String) model.getValueAt(0, 1);
+        options.start = (Double) model.getValueAt(1, 1);
+        options.count = (Integer) model.getValueAt(2, 1);
+        options.stride = (Double) model.getValueAt(3, 1);
+        options.sigmaX = (Double) model.getValueAt(4, 1);
+        options.sigmaY = (Double) model.getValueAt(5, 1);
+        options.outlierCount = (Integer) model.getValueAt(7, 1);
+        options.outlierScale = (Double) model.getValueAt(8, 1);
+
+        return options;
+    }
+
     private void updateModel() {
         TableModel model = getModel();
 

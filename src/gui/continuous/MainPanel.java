@@ -30,10 +30,10 @@ public class MainPanel extends DataTab {
 
         generator = new ContinuousGenerator(10);
 
-        updateGraph(settingsForm.getData());
+        updateData(settingsForm.getData());
 
         // Config
-        settingsForm.addListener(this::updateGraph);
+        settingsForm.addListener(this::updateData);
         buttonPanel.addSaveListener(data -> saveData());
         buttonPanel.addReseedListener(data -> reseedData());
         buttonPanel.addMoreOptionsListener(data -> openMoreOptionsFrame());
@@ -84,9 +84,11 @@ public class MainPanel extends DataTab {
         setVisible(true);
     }
 
-    private void updateGraph(ContinuousSettings.SettingsData data) {
+    private void updateData(ContinuousSettings.SettingsData data) {
         if (data == null)
             return;
+
+        settingsForm.setData(data);
 
         Function f;
 
@@ -119,13 +121,13 @@ public class MainPanel extends DataTab {
 
     public void reseedData() {
         ContinuousSettings.SettingsData settings = settingsForm.getData();
-        updateGraph(settings);
+        updateData(settings);
     }
 
     private void openMoreOptionsFrame() {
         if (moreOptionsFrame == null) {
             moreOptionsFrame = new MoreOptionsFrame(ContinuousOptions.valueOf(settingsForm.getData()));
-            moreOptionsFrame.addContinuousOptionsListener(this::updateGraph);
+            moreOptionsFrame.addContinuousOptionsListener(this::updateData);
             moreOptionsFrame.addCloseListener(data -> MainPanel.this.moreOptionsFrame = null);
         }
     }

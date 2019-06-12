@@ -13,10 +13,10 @@ public class MoreOptionsFrame extends JFrame {
     private static final Dimension SIZE = new Dimension(400, 600);
     private static final String TITLE = "More Options";
 
-    private final JTable table;
+    private final MoreOptionsTable table;
     private final JScrollPane tableContainer;
     private final JButton submitButton;
-    private final JButton cancelButton;
+    private final JButton closeButton;
 
     private final ArrayList<Listener<ContinuousOptions>> continuousOptionsListeners;
     private final ArrayList<Listener<Void>> closeListeners;
@@ -29,16 +29,17 @@ public class MoreOptionsFrame extends JFrame {
             table = new MoreOptionsTable();
         else
             table = new MoreOptionsTable(options);
+
         tableContainer = new JScrollPane(table);
         submitButton = new JButton("Save");
-        cancelButton = new JButton("Cancel");
+        closeButton = new JButton("Close");
 
         closeListeners = new ArrayList<>();
         continuousOptionsListeners = new ArrayList<>();
 
         // Setup
         submitButton.addActionListener(e -> submitData());
-        cancelButton.addActionListener(e -> close());
+        closeButton.addActionListener(e -> close());
 
         // Layout
         setLayout(new GridBagLayout());
@@ -69,7 +70,7 @@ public class MoreOptionsFrame extends JFrame {
         c.gridwidth = 1;
         c.gridheight = 1;
 
-        add(cancelButton, c);
+        add(closeButton, c);
 
         // Submit Button
         c.gridx = 1;
@@ -120,7 +121,7 @@ public class MoreOptionsFrame extends JFrame {
     }
 
     private ContinuousOptions getData() {
-        return null;
+        return table.getOptions();
     }
 
     public void addContinuousOptionsListener(Listener<ContinuousOptions> l) {

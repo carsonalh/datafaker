@@ -237,6 +237,22 @@ public class ContinuousSettings extends JPanel {
         return data;
     }
 
+    public void setData(SettingsData data) {
+        functionTextField.setText(data.function);
+        startSpinner.setValue(data.start);
+        countSpinner.setValue(data.count);
+        strideSpinner.setValue(data.stride);
+        sigmaXSpinner.setValue(data.sigmaX);
+        sigmaYSpinner.setValue(data.sigmaY);
+        outlierCountSpinner.setValue(data.outlierCount);
+        outlierScaleSpinner.setValue(data.outlierScale);
+
+        // Outlier is not enabled
+        if (data.outlierCount == 0) {
+            outlierCheckbox.setSelected(false);
+        }
+    }
+
     private void updateOutliersGUI() {
         outlierEnabled = outlierCheckbox.isSelected();
 
