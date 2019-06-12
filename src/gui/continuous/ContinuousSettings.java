@@ -42,7 +42,7 @@ public class ContinuousSettings extends JPanel {
         outlierCountLabel = new JLabel("One Every:");
         outlierScaleLabel = new JLabel("Scale:");
 
-        functionTextField = new JTextField(20);
+        functionTextField = new JTextField(16);
         startSpinner = new JSpinner();
         countSpinner = new JSpinner();
         strideSpinner = new JSpinner();

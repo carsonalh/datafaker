@@ -33,8 +33,8 @@ public class MainPanel extends DataTab {
 
         // Config
         settingsForm.addListener(this::updateGraph);
-        buttonPanel.addSaveListener(this::saveData);
-        buttonPanel.addReseedListener(this::reseedData);
+        buttonPanel.addSaveListener(data -> saveData());
+        buttonPanel.addReseedListener(data -> reseedData());
 
         graphPanel.setBorder(BorderFactory.createEtchedBorder());
 
@@ -42,6 +42,7 @@ public class MainPanel extends DataTab {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+        // Settings Form
         c.gridx = 0;
         c.gridy = 0;
         c.gridheight = 1;
@@ -52,16 +53,18 @@ public class MainPanel extends DataTab {
 
         add(settingsForm, c);
 
+        // Graph Panel
         c.gridx = 1;
         c.gridy = 0;
         c.gridheight = 2;
         c.gridwidth = 1;
-        c.weightx = 1;
+        c.weightx = 3;
         c.weighty = 1;
         c.anchor = GridBagConstraints.CENTER;
 
         add(graphPanel, c);
 
+        // Button Panel
         c.gridx = 0;
         c.gridy = 1;
         c.gridheight = 1;

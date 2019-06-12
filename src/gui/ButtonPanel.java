@@ -1,5 +1,7 @@
 package gui;
 
+import general.Listener;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -8,9 +10,11 @@ public class ButtonPanel extends JPanel {
 
     private final JButton saveButton;
     private final JButton reseedButton;
+    private final JButton moreOptionsButton;
 
-    private final ArrayList<SaveListener> saveListeners = new ArrayList<>();
-    private final ArrayList<ReseedListener> reseedListeners = new ArrayList<>();
+    private final ArrayList<Listener<Void>> saveListeners = new ArrayList<>();
+    private final ArrayList<Listener<Void>> reseedListeners = new ArrayList<>();
+    private final ArrayList<Listener<Void>> moreOptionsListeners = new ArrayList<>();
 
     public ButtonPanel() {
         super();
@@ -18,16 +22,22 @@ public class ButtonPanel extends JPanel {
         // Creation
         reseedButton = new JButton("Re-Seed Data");
         saveButton = new JButton("Save...");
+        moreOptionsButton = new JButton("More Options...");
 
         // Setup
         saveButton.addActionListener(e -> {
-            for (SaveListener l : saveListeners)
-                l.onSave();
+            for (Listener l : saveListeners)
+                l.onSubmit(null);
         });
 
         reseedButton.addActionListener(e -> {
-            for (ReseedListener l : reseedListeners)
-                l.onReseed();
+            for (Listener l : reseedListeners)
+                l.onSubmit(null);
+        });
+
+        moreOptionsButton.addActionListener(e -> {
+            for (Listener l : moreOptionsListeners)
+                l.onSubmit(null);
         });
 
         // Layout
@@ -48,22 +58,20 @@ public class ButtonPanel extends JPanel {
         c.gridy = 1;
 
         add(saveButton, c);
+
+        // More Options
+        c.gridx = 0;
+        c.gridy = 2;
+
+        add(moreOptionsButton, c);
     }
 
-    public void addSaveListener(SaveListener l) {
+    public void addSaveListener(Listener<Void> l) {
         saveListeners.add(l);
     }
 
-    public void addReseedListener(ReseedListener l) {
+    public void addReseedListener(Listener<Void> l) {
         reseedListeners.add(l);
-    }
-
-    public interface SaveListener {
-        void onSave();
-    }
-
-    public interface ReseedListener {
-        void onReseed();
     }
 
 }

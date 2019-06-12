@@ -27,8 +27,8 @@ public class MainPanel extends DataTab {
         updateCenter(generator);
 
         settingsForm.addListener(this::updateGraph);
-        buttonPanel.addReseedListener(this::reseedData);
-        buttonPanel.addSaveListener(this::saveData);
+        buttonPanel.addReseedListener(data -> reseedData());
+        buttonPanel.addSaveListener(data -> saveData());
 
         discreteGraph.setBorder(BorderFactory.createEtchedBorder());
 
