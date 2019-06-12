@@ -1,7 +1,6 @@
-package gui;
+package gui.continuous;
 
 import general.Listener;
-import gui.continuous.ContinuousOptions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +24,7 @@ public class MoreOptionsFrame extends JFrame {
         // Creation
         table = new JTable();
         tableContainer = new JScrollPane(table);
-        submitButton = new JButton("Submit");
+        submitButton = new JButton("Save");
         cancelButton = new JButton("Cancel");
 
         listeners = new ArrayList<>();
