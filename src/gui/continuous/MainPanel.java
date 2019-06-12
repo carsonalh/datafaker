@@ -1,7 +1,7 @@
 package gui.continuous;
 
-import function.FunctionLoader;
 import function.Function;
+import function.FunctionLoader;
 import gui.ButtonPanel;
 import gui.DataTab;
 import net.objecthunter.exp4j.tokenizer.UnknownFunctionOrVariableException;
