@@ -1,7 +1,7 @@
 package gui.continuous;
 
 import function.FunctionLoader;
-import function.TrendFunction;
+import function.Function;
 import gui.ButtonPanel;
 import gui.DataTab;
 import net.objecthunter.exp4j.tokenizer.UnknownFunctionOrVariableException;
@@ -87,7 +87,7 @@ public class MainPanel extends DataTab {
         if (data == null)
             return;
 
-        TrendFunction f;
+        Function f;
 
         try {
             f = FunctionLoader.loadFromString(data.function);

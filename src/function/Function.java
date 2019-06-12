@@ -1,5 +1,5 @@
 package function;
 
-public interface TrendFunction {
+public interface Function {
     double f(double x);
 }

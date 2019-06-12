@@ -1,13 +1,13 @@
 package gui.continuous;
 
 import data.DataGenerator;
-import function.TrendFunction;
+import function.Function;
 
 import java.util.Random;
 
 public class ContinuousGenerator extends DataGenerator<Double> {
 
-    private TrendFunction function;
+    private Function function;
     private double start = 0;
     private int count = 10;
     private double stride = 1;
@@ -20,7 +20,7 @@ public class ContinuousGenerator extends DataGenerator<Double> {
         this(count, null, 0, 0, 0, 0, 0, 0);
     }
 
-    public ContinuousGenerator(int count, TrendFunction function, double start, double stride, double sigmaX, double sigmaY, int outlierCount, double outlierScale) {
+    public ContinuousGenerator(int count, Function function, double start, double stride, double sigmaX, double sigmaY, int outlierCount, double outlierScale) {
         super(count);
         this.function = function;
         this.start = start;
@@ -142,11 +142,11 @@ public class ContinuousGenerator extends DataGenerator<Double> {
         this.sigmaY = sigmaY;
     }
 
-    public TrendFunction getFunction() {
+    public Function getFunction() {
         return function;
     }
 
-    public void setFunction(TrendFunction function) {
+    public void setFunction(Function function) {
         this.function = function;
     }
 }

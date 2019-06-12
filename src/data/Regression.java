@@ -1,10 +1,10 @@
 package data;
 
-import function.TrendFunction;
+import function.Function;
 
 public class Regression {
 
-    public static TrendFunction linearRegression(Double[][] data) {
+    public static Function linearRegression(Double[][] data) {
         final double meanX, meanY;
         double xSum = 0, ySum = 0;
         double count = data.length;
