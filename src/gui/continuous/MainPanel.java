@@ -16,6 +16,7 @@ public class MainPanel extends DataTab {
     private final ContinuousSettings settingsForm;
     private final ContinuousGraph graphPanel;
     private final ButtonPanel buttonPanel;
+    private MoreOptionsFrame moreOptionsFrame;
 
     private ContinuousGenerator generator;
 
@@ -122,7 +123,11 @@ public class MainPanel extends DataTab {
     }
 
     private void openMoreOptionsFrame() {
-        MoreOptionsFrame optionsFrame = new MoreOptionsFrame();
+        if (moreOptionsFrame == null) {
+            moreOptionsFrame = new MoreOptionsFrame(ContinuousOptions.valueOf(settingsForm.getData()));
+            moreOptionsFrame.addContinuousOptionsListener(this::updateGraph);
+            moreOptionsFrame.addCloseListener(data -> MainPanel.this.moreOptionsFrame = null);
+        }
     }
 
 }

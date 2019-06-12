@@ -4,11 +4,13 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+import java.util.Arrays;
 
 public class MoreOptionsTable extends JTable {
 
     private static final String[] COLUMNS = new String[]{"Field", "Value"};
-    private static final Object[][] DATA = {
+    private static final Object[][] DEFAULT_DATA = {
             {"Function", "x^2", String.class},
             {"Start", 0.0, Double.class},
             {"Count", 0, Integer.class},
@@ -20,23 +22,52 @@ public class MoreOptionsTable extends JTable {
             {"Scale", 0.0, Double.class},
     };
     private Class editingClass = null;
+    private Object[][] data;
 
     public MoreOptionsTable() {
         super(new MoreOptionsTableModel(getDisplayData(), COLUMNS));
 
         getTableHeader().setReorderingAllowed(false);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        data = getDisplayData();
+    }
+
+    public MoreOptionsTable(ContinuousOptions options) {
+        this();
+
+        data[0][1] = options.function; // Function
+        data[1][1] = options.start; // Start
+        data[2][1] = options.count; // Count
+        data[3][1] = options.stride; // Stride
+        data[4][1] = options.sigmaX; // Sigma X
+        data[5][1] = options.sigmaY; // Sigma Y
+        data[6][1] = options.outlierCount != 0; // Outliers
+        data[7][1] = options.outlierCount; // One Every
+        data[8][1] = options.outlierScale; // Scale
+
+        updateModel();
     }
 
     private static Object[][] getDisplayData() {
-        Object[][] displayData = new Object[DATA.length][2];
+        Object[][] displayData = new Object[DEFAULT_DATA.length][2];
 
-        for (int i = 0; i < DATA.length; i++) {
-            displayData[i][0] = DATA[i][0];
-            displayData[i][1] = DATA[i][1];
+        for (int i = 0; i < DEFAULT_DATA.length; i++) {
+            displayData[i][0] = DEFAULT_DATA[i][0];
+            displayData[i][1] = DEFAULT_DATA[i][1];
         }
 
         return displayData;
+    }
+
+    private void updateModel() {
+        TableModel model = getModel();
+
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[i].length; j++) {
+                model.setValueAt(data[i][j], i, j);
+            }
+        }
     }
 
     @Override

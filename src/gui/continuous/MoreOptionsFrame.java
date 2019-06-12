@@ -4,6 +4,8 @@ import general.Listener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class MoreOptionsFrame extends JFrame {
@@ -16,22 +18,27 @@ public class MoreOptionsFrame extends JFrame {
     private final JButton submitButton;
     private final JButton cancelButton;
 
-    private final ArrayList<Listener<ContinuousOptions>> listeners;
+    private final ArrayList<Listener<ContinuousOptions>> continuousOptionsListeners;
+    private final ArrayList<Listener<Void>> closeListeners;
 
-    public MoreOptionsFrame() {
+    public MoreOptionsFrame(ContinuousOptions options) {
         super();
 
         // Creation
-        table = new MoreOptionsTable();
+        if (options == null)
+            table = new MoreOptionsTable();
+        else
+            table = new MoreOptionsTable(options);
         tableContainer = new JScrollPane(table);
         submitButton = new JButton("Save");
         cancelButton = new JButton("Cancel");
 
-        listeners = new ArrayList<>();
+        closeListeners = new ArrayList<>();
+        continuousOptionsListeners = new ArrayList<>();
 
         // Setup
         submitButton.addActionListener(e -> submitData());
-        cancelButton.addActionListener(e -> MoreOptionsFrame.this.dispose());
+        cancelButton.addActionListener(e -> close());
 
         // Layout
         setLayout(new GridBagLayout());
@@ -78,13 +85,37 @@ public class MoreOptionsFrame extends JFrame {
         setMinimumSize(SIZE);
         setAlwaysOnTop(true);
         setTitle(TITLE);
+        setLocationRelativeTo(null);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                MoreOptionsFrame.this.close();
+            }
+        });
+
         setVisible(true);
+    }
+
+    public MoreOptionsFrame() {
+        this(null);
+    }
+
+    private void close() {
+        for (Listener l : closeListeners)
+            l.onSubmit(null);
+
+        dispose();
+    }
+
+    public void addCloseListener(Listener<Void> l) {
+        closeListeners.add(l);
     }
 
     private void submitData() {
         ContinuousOptions options = getData();
 
-        for (Listener l : listeners)
+        for (Listener l : continuousOptionsListeners)
             l.onSubmit(options);
     }
 
@@ -93,7 +124,7 @@ public class MoreOptionsFrame extends JFrame {
     }
 
     public void addContinuousOptionsListener(Listener<ContinuousOptions> l) {
-        listeners.add(l);
+        continuousOptionsListeners.add(l);
     }
 
 }
