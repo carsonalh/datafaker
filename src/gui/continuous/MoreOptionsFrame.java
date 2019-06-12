@@ -22,7 +22,7 @@ public class MoreOptionsFrame extends JFrame {
         super();
 
         // Creation
-        table = new JTable();
+        table = new MoreOptionsTable();
         tableContainer = new JScrollPane(table);
         submitButton = new JButton("Save");
         cancelButton = new JButton("Cancel");
