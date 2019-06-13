@@ -244,14 +244,9 @@ public class ContinuousSettings extends JPanel {
         data.stride = (Double) strideSpinner.getValue();
         data.sigmaX = (Double) sigmaXSpinner.getValue();
         data.sigmaY = (Double) sigmaYSpinner.getValue();
-
-        if (outlierEnabled) {
-            data.outlierCount = (Integer) outlierCountSpinner.getValue();
-            data.outlierScale = (Double) outlierScaleSpinner.getValue();
-        } else {
-            data.outlierCount = 0;
-            data.outlierScale = 0;
-        }
+        data.outliersEnabled = outlierCheckbox.isSelected();
+        data.outlierCount = (Integer) outlierCountSpinner.getValue();
+        data.outlierScale = (Double) outlierScaleSpinner.getValue();
 
         return data;
     }
@@ -268,13 +263,11 @@ public class ContinuousSettings extends JPanel {
         strideSpinner.setValue(data.stride);
         sigmaXSpinner.setValue(data.sigmaX);
         sigmaYSpinner.setValue(data.sigmaY);
+        outlierCheckbox.setSelected(data.outliersEnabled);
         outlierCountSpinner.setValue(data.outlierCount);
         outlierScaleSpinner.setValue(data.outlierScale);
 
-        // Outlier is not enabled
-        if (data.outlierCount == 0) {
-            outlierCheckbox.setSelected(false);
-        }
+        updateOutliersGUI();
     }
 
     /**
@@ -295,13 +288,14 @@ public class ContinuousSettings extends JPanel {
      */
     public static class SettingsData {
         public String function;
-        public double start;
-        public int count;
-        public int outlierCount;
-        public double outlierScale;
-        public double stride;
-        public double sigmaX;
-        public double sigmaY;
+        public Double start;
+        public Integer count;
+        public Double stride;
+        public Double sigmaX;
+        public Double sigmaY;
+        public Boolean outliersEnabled;
+        public Integer outlierCount;
+        public Double outlierScale;
     }
 
 }

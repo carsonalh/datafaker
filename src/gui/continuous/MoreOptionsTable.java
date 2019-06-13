@@ -91,6 +91,7 @@ public class MoreOptionsTable extends JTable {
         options.stride = (Double) model.getValueAt(3, 1);
         options.sigmaX = (Double) model.getValueAt(4, 1);
         options.sigmaY = (Double) model.getValueAt(5, 1);
+        options.outliersEnabled = (Boolean) model.getValueAt(6, 1);
         options.outlierCount = (Integer) model.getValueAt(7, 1);
         options.outlierScale = (Double) model.getValueAt(8, 1);
 

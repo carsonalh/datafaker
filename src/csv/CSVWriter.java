@@ -47,7 +47,7 @@ public class CSVWriter<T> {
      */
     public void write() throws IOException {
         if (data == null)
-            throw new IOException();
+            throw new IOException("Data is null");
 
         FileWriter writer = new FileWriter(file);
 

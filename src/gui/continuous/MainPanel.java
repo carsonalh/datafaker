@@ -122,8 +122,17 @@ public class MainPanel extends DataTab {
         generator.setStride(data.stride);
         generator.setSigmaX(data.sigmaX);
         generator.setSigmaY(data.sigmaY);
-        generator.setOutlierCount(data.outlierCount);
-        generator.setOutlierScale(data.outlierScale);
+
+        if (data.outliersEnabled) {
+            generator.setOutlierCount(data.outlierCount);
+            generator.setOutlierScale(data.outlierScale);
+        } else {
+            generator.setOutlierCount(0);
+            generator.setOutlierScale(0d);
+        }
+
+        // Update the values in ContinuousSettings
+        settingsForm.setData(data);
 
         this.data = generator.genData();
 
