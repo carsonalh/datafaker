@@ -54,7 +54,7 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
         rangeStartSpinner.setModel(new SpinnerNumberModel(0, 0, 1e7, .1));
         rangeStrideSpinner.setModel(new SpinnerNumberModel(1, 0, 1e7, .1));
         sigmaXSpinner.setModel(new SpinnerNumberModel(1, 0, 1e7, .1));
-        centerSpinner.setModel(new SpinnerNumberModel(1, 0, 1e7, .1));
+        centerSpinner.setModel(new DynamicSpinnerNumberModel<Double>(0.0, 0.0, 10.0, 0.01));
 
         // Set the spinners to the default values
         DiscreteGenerator g = new DiscreteGenerator();
@@ -186,7 +186,10 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
         if (!(start <= center && center <= end))
             center = start;
 
-        centerSpinner.setModel(new SpinnerNumberModel(center, start, end, 0.1));
+        DynamicSpinnerNumberModel<Double> centerModel = (DynamicSpinnerNumberModel<Double>) centerSpinner.getModel();
+        centerModel.setMinimumValue(start);
+        centerModel.setMaximumValue(end);
+        centerModel.setValue(center);
     }
 
     public void addListener(Listener<SettingsData> l) {
