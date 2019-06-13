@@ -34,9 +34,9 @@ public class MainPanel extends DataTab {
         graphPanel = new ContinuousGraph(data);
         buttonPanel = new ButtonPanel();
 
-        generator = new ContinuousGenerator(10);
+        generator = new ContinuousGenerator(0);
 
-        updateData(settingsForm.getData());
+        updateData(ContinuousOptions.getDefaultOptions());
 
         // Config
         settingsForm.addListener(this::updateData);

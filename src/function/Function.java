@@ -10,5 +10,5 @@ public interface Function {
      * @param x The input.
      * @return The output.
      */
-    double f(double x);
+    Double f(Double x);
 }

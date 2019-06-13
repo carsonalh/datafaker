@@ -67,6 +67,18 @@ public class ContinuousSettings extends JPanel {
         outlierCountSpinner.setModel(new SpinnerNumberModel(0, 0, (int) 1e7, 1));
         outlierScaleSpinner.setModel(new SpinnerNumberModel(0, 0, 1e7, 0.01));
 
+        ContinuousOptions defaults = ContinuousOptions.getDefaultOptions();
+
+        functionTextField.setText(defaults.function);
+        countSpinner.setValue(defaults.count);
+        strideSpinner.setValue(defaults.stride);
+        startSpinner.setValue(defaults.start);
+        sigmaXSpinner.setValue(defaults.sigmaX);
+        sigmaYSpinner.setValue(defaults.sigmaY);
+        outlierCheckbox.setSelected(defaults.outliersEnabled);
+        outlierCountSpinner.setValue(defaults.outlierCount);
+        outlierScaleSpinner.setValue(defaults.outlierScale);
+
         functionTextField.addActionListener(e -> this.update());
         startSpinner.addChangeListener(e -> this.update());
         countSpinner.addChangeListener(e -> this.update());
@@ -79,11 +91,6 @@ public class ContinuousSettings extends JPanel {
 
         outlierCheckbox.addActionListener(e -> this.updateOutliersGUI());
         updateOutliersGUI();
-
-        functionTextField.setText("sin(x)");
-        countSpinner.setValue(100);
-        strideSpinner.setValue(.1);
-        outlierCheckbox.setSelected(false);
 
         // Layout
         setLayout(new GridBagLayout());

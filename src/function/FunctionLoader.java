@@ -53,7 +53,15 @@ public class FunctionLoader {
 
         Function function = x -> {
             calc.setVariable(FUNC_VAR_NAME, x);
-            return calc.evaluate();
+
+            Double result;
+            try {
+                result = calc.evaluate();
+            } catch (ArithmeticException e) {
+                result = null;
+            }
+
+            return result;
         };
 
         return function;
