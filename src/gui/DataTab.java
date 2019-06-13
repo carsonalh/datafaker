@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+/**
+ * An abstract class for each GUI tab in the application.
+ */
 public abstract class DataTab extends JPanel {
 
     protected DataGenerator<Double> generator;

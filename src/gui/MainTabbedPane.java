@@ -2,6 +2,9 @@ package gui;
 
 import javax.swing.*;
 
+/**
+ * The pane containing the tabs in the application.
+ */
 public class MainTabbedPane extends JTabbedPane {
 
     private gui.continuous.MainPanel continuousPanel;

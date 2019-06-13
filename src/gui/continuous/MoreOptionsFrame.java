@@ -8,6 +8,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+/**
+ * The "more options" frame of the application. Has all the settings that are available.
+ */
 public class MoreOptionsFrame extends JFrame {
 
     private static final Dimension SIZE = new Dimension(400, 600);
@@ -21,6 +24,11 @@ public class MoreOptionsFrame extends JFrame {
     private final ArrayList<Listener<ContinuousOptions>> continuousOptionsListeners;
     private final ArrayList<Listener<Void>> closeListeners;
 
+    /**
+     * Constructs a <code>MoreOptionsFrame</code> instance.
+     *
+     * @param options The options the fields are set to by default.
+     */
     public MoreOptionsFrame(ContinuousOptions options) {
         super();
 
@@ -98,10 +106,17 @@ public class MoreOptionsFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Constructs a <code>MoreOptionsFrame</code> instance.
+     */
     public MoreOptionsFrame() {
         this(null);
     }
 
+    /**
+     * Fired when the window closes. Fires all the <code>Listener&lt;Void&gt;</code> instances
+     * in the <code>closeListeners</code> <code>ArrayList</code>.
+     */
     private void close() {
         for (Listener l : closeListeners)
             l.onSubmit(null);
@@ -109,10 +124,18 @@ public class MoreOptionsFrame extends JFrame {
         dispose();
     }
 
+    /**
+     * Adds a <em>close</em> listener to the <code>closeListeners</code> <code>ArrayList</code>.
+     *
+     * @param l The listener to add.
+     */
     public void addCloseListener(Listener<Void> l) {
         closeListeners.add(l);
     }
 
+    /**
+     * Fired when the data needs to be submitted.
+     */
     private void submitData() {
         ContinuousOptions options = getData();
 
@@ -120,10 +143,18 @@ public class MoreOptionsFrame extends JFrame {
             l.onSubmit(options);
     }
 
+    /**
+     * Gets the data in the fields.
+     * @return The data in the fields.
+     */
     private ContinuousOptions getData() {
         return table.getOptions();
     }
 
+    /**
+     * Adds a listener for when the field values are saved.
+     * @param l The listener to add.
+     */
     public void addContinuousOptionsListener(Listener<ContinuousOptions> l) {
         continuousOptionsListeners.add(l);
     }

@@ -5,6 +5,9 @@ import function.Function;
 
 import java.util.Random;
 
+/**
+ * A class for generating continuous data about a trend line.
+ */
 public class ContinuousGenerator extends DataGenerator<Double> {
 
     private Function function;
@@ -16,10 +19,27 @@ public class ContinuousGenerator extends DataGenerator<Double> {
     private int outlierCount;
     private double outlierScale;
 
+    /**
+     * Constructs a <code>ContinuousGenerator</code> that will generate <code>count</code> objects.
+     *
+     * @param count The number of objects to generate.
+     */
     public ContinuousGenerator(int count) {
         this(count, null, 0, 0, 0, 0, 0, 0);
     }
 
+    /**
+     * Constructs a <code>ContinuousGenerator</code>.
+     *
+     * @param count        How many data points will be generated.
+     * @param function     The function to generate them about.
+     * @param start        The starting x-value of all the points.
+     * @param stride       How far apart the points are spaced.
+     * @param sigmaX       The value of one standard deviation in the x direction.
+     * @param sigmaY       The value of one standard deviation in the y direction.
+     * @param outlierCount How often outliers appear (1 outlier appears roughly every <code>outlierCount</code>).
+     * @param outlierScale The standard deviations (sigma values) are scaled by this value for outlier points.
+     */
     public ContinuousGenerator(int count, Function function, double start, double stride, double sigmaX, double sigmaY, int outlierCount, double outlierScale) {
         super(count);
         this.function = function;
@@ -32,6 +52,11 @@ public class ContinuousGenerator extends DataGenerator<Double> {
         this.outlierScale = outlierScale;
     }
 
+    /**
+     * Generates the data given all the other parameters.
+     *
+     * @return A <code>Double[][]</code> of all the points generated.
+     */
     public Double[][] genData() {
         final double OUTLIER_PROBABILITY;
 
@@ -44,7 +69,6 @@ public class ContinuousGenerator extends DataGenerator<Double> {
         Double[][] out = new Double[count][2]; // The output data
 
         Random r = new Random();
-        advanceRandom(r);
 
         for (int i = 0; i < count; i++) {
             final double trendX, trendY;
@@ -75,11 +99,6 @@ public class ContinuousGenerator extends DataGenerator<Double> {
         data = out;
 
         return out;
-    }
-
-    private void advanceRandom(Random r) {
-        for (int i = 0; i < 10; i++)
-            r.nextDouble();
     }
 
     public int getOutlierCount() {
@@ -149,4 +168,5 @@ public class ContinuousGenerator extends DataGenerator<Double> {
     public void setFunction(Function function) {
         this.function = function;
     }
+
 }

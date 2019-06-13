@@ -4,22 +4,47 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * A class for writing 2D arrays to a CSV file.
+ *
+ * @param <T> The type of data in the 2D array.
+ */
 public class CSVWriter<T> {
     private File file;
     private T[][] data;
 
+    /**
+     * Constructs a CSVWriter with the output file of <code>file</code>.
+     *
+     * @param file The file to write the data to.
+     */
     public CSVWriter(File file) {
         this.file = file;
     }
 
+    /**
+     * Sets the data to write to the file with.
+     *
+     * @param data The data to write to the file with.
+     */
     public void setData(T[][] data) {
         this.data = data;
     }
 
+    /**
+     * Sets the file to write to.
+     *
+     * @param file The file to write to.
+     */
     public void setFile(File file) {
         this.file = file;
     }
 
+    /**
+     * Writes the data to the given file.
+     *
+     * @throws IOException
+     */
     public void write() throws IOException {
         if (data == null)
             throw new IOException();
@@ -35,6 +60,8 @@ public class CSVWriter<T> {
 
             rowText.append(row[row.length - 1].toString());
             rowText.append('\n');
+
+            // rowText will be in the format of: abc,def,...,xyz\n
 
             writer.write(rowText.toString());
         }

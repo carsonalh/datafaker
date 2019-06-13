@@ -3,6 +3,9 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The frame containing the main section of the application.
+ */
 public class MainFrame extends JFrame {
 
     private final static Dimension SIZE = new Dimension(800, 600);

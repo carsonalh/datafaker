@@ -6,6 +6,9 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
+/**
+ * A table to edit all the fields in the application.
+ */
 public class MoreOptionsTable extends JTable {
 
     private static final String[] COLUMNS = new String[]{"Field", "Value"};
@@ -23,6 +26,9 @@ public class MoreOptionsTable extends JTable {
     private Class editingClass = null;
     private Object[][] data;
 
+    /**
+     * Constructs a new <code>MoreOptionsTable</code> instance.
+     */
     public MoreOptionsTable() {
         super(new MoreOptionsTableModel(getDisplayData(), COLUMNS));
 
@@ -32,6 +38,12 @@ public class MoreOptionsTable extends JTable {
         data = getDisplayData();
     }
 
+    /**
+     * Constructs a new <code>ContinuousOptions</code> instance and passes in the field
+     * values that are already set.
+     *
+     * @param options The options to pass.
+     */
     public MoreOptionsTable(ContinuousOptions options) {
         this();
 
@@ -48,6 +60,12 @@ public class MoreOptionsTable extends JTable {
         updateModel();
     }
 
+    /**
+     * Extracts the data to display out of all the fields in the static <code>DEFAULT_DATA</code>
+     * array.
+     *
+     * @return The 2D array containing all the data to be put into the cells of the table.
+     */
     private static Object[][] getDisplayData() {
         Object[][] displayData = new Object[DEFAULT_DATA.length][2];
 
@@ -59,6 +77,10 @@ public class MoreOptionsTable extends JTable {
         return displayData;
     }
 
+    /**
+     * Returns the options that are currently in the fields.
+     * @return The options that are currently in the fields.
+     */
     public ContinuousOptions getOptions() {
         ContinuousOptions options = new ContinuousOptions();
         TableModel model = getModel();
@@ -75,6 +97,9 @@ public class MoreOptionsTable extends JTable {
         return options;
     }
 
+    /**
+     * Copys the values from the <code>data</code> array into the table model.
+     */
     private void updateModel() {
         TableModel model = getModel();
 

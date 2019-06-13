@@ -6,6 +6,9 @@ import gui.DataTab;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The panel for making discrete data.
+ */
 public class MainPanel extends DataTab {
 
     private ButtonPanel buttonPanel;

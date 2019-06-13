@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * The button panel for options concerning reseeding data, saving data, and opening all the options.
+ */
 public class ButtonPanel extends JPanel {
 
     private final JButton saveButton;

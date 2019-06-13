@@ -7,11 +7,21 @@ import net.objecthunter.exp4j.tokenizer.UnknownFunctionOrVariableException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Loads a <code>Function</code> class from a file or string.
+ */
 public class FunctionLoader {
 
     private static final int READ_BUFFER_SIZE = 2048;
     private static final String FUNC_VAR_NAME = "x";
 
+    /**
+     * Loads a <code>Function</code> object from a file.
+     *
+     * @param filename The filename of the file to read from.
+     * @return The <code>Function</code> object.
+     * @throws IOException
+     */
     public static Function loadFromFile(String filename) throws IOException {
         FileReader reader = new FileReader(filename);
 
@@ -27,6 +37,13 @@ public class FunctionLoader {
         return loadFromString(functionString);
     }
 
+    /**
+     * Loads a <code>Function</code> object from a string.
+     *
+     * @param s The string version of the function.
+     * @return The <code>Function</code> object.
+     * @throws UnknownFunctionOrVariableException
+     */
     public static Function loadFromString(String s) throws UnknownFunctionOrVariableException {
         Expression calc;
 

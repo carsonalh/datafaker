@@ -4,6 +4,9 @@ import data.DataGenerator;
 
 import java.util.Random;
 
+/**
+ * A class for generating discrete data.
+ */
 public class DiscreteGenerator extends DataGenerator<Double> {
 
     private int count;
@@ -13,10 +16,23 @@ public class DiscreteGenerator extends DataGenerator<Double> {
     private double sigmaX;
     private double center;
 
+    /**
+     * Constructs a <code>DiscreteGenerator</code> instance.
+     */
     public DiscreteGenerator() {
         this(100, 10, 0, 1, 1, 0);
     }
 
+    /**
+     * Constructs a <code>DiscreteGenerator</code> instance.
+     *
+     * @param count       The amount of data points to generate.
+     * @param rangeCount  The amount of ranges for the points to be classified into.
+     * @param rangeStart  The starting point of the ranges.
+     * @param rangeStride The spacing between each range.
+     * @param sigmaX      The value of one standard deviation.
+     * @param center      The center value of the normal distribution.
+     */
     public DiscreteGenerator(int count, int rangeCount, double rangeStart, double rangeStride, double sigmaX, double center) {
         super(count);
         this.count = count;
@@ -27,6 +43,11 @@ public class DiscreteGenerator extends DataGenerator<Double> {
         this.center = center;
     }
 
+    /**
+     * Generates, and classifies the data into the discrete ranges.
+     *
+     * @return The array with all the generated, and classified data.
+     */
     public Double[][] genData() {
         data = new Double[rangeCount][2];
         double rangeEnd = getRangeEnd();

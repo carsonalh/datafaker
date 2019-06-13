@@ -6,6 +6,9 @@ import gui.SettingsForm;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A GUI component for modifying the discrete settings and the discrete graph.
+ */
 public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData> {
 
     private static final int SPINNER_WIDTH = 200;
@@ -24,6 +27,9 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
     private final JSpinner sigmaXSpinner;
     private final JSpinner centerSpinner;
 
+    /**
+     * Constructs a <code>DiscreteSettings</code> instance.
+     */
     public DiscreteSettings() {
         super();
 
@@ -155,6 +161,9 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
         add(centerSpinner, c);
     }
 
+    /**
+     * Gets the data from <code>getData</code> and sends it to all the listeners.
+     */
     private void update() {
         SettingsData data = getData();
 
@@ -162,6 +171,12 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
             l.onSubmit(data);
     }
 
+    /**
+     * Sets the range that the center spinner can be between.
+     *
+     * @param start The start of the range.
+     * @param end   The end of the range.
+     */
     public void setCenterRange(double start, double end) {
         if (end < start)
             return;

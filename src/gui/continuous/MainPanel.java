@@ -9,6 +9,9 @@ import net.objecthunter.exp4j.tokenizer.UnknownFunctionOrVariableException;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The main panel of the continuous tab.
+ */
 public class MainPanel extends DataTab {
 
     private static final Dimension SIZE = new Dimension(800, 600);
@@ -20,6 +23,9 @@ public class MainPanel extends DataTab {
 
     private ContinuousGenerator generator;
 
+    /**
+     * Constructs a <code>MainPanel</code> instance.
+     */
     public MainPanel() {
         super();
 
@@ -84,6 +90,11 @@ public class MainPanel extends DataTab {
         setVisible(true);
     }
 
+    /**
+     * Updates the data in the fields and on the graph.
+     *
+     * @param data The data to update with.
+     */
     private void updateData(ContinuousSettings.SettingsData data) {
         if (data == null)
             return;

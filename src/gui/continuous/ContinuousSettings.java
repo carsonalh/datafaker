@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * A GUI class for changing the settings regarding continuous data generation.
+ */
 public class ContinuousSettings extends JPanel {
 
     private final ArrayList<Listener<SettingsData>> listeners = new ArrayList<>();
@@ -30,6 +33,9 @@ public class ContinuousSettings extends JPanel {
     private final JSpinner outlierScaleSpinner;
     private boolean outlierEnabled;
 
+    /**
+     * Constructs a <code>ContinuousSettings</code> object.
+     */
     public ContinuousSettings() {
         // Creation
         functionLabel = new JLabel("Function:");
@@ -205,10 +211,18 @@ public class ContinuousSettings extends JPanel {
         add(outlierScaleSpinner, c);
     }
 
+    /**
+     * Adds a listener for when the fields are changed.
+     *
+     * @param l The listener to add.
+     */
     public void addListener(Listener<SettingsData> l) {
         listeners.add(l);
     }
 
+    /**
+     * Fires when field values are changed.
+     */
     public void update() {
         SettingsData data = getData();
 
@@ -216,6 +230,11 @@ public class ContinuousSettings extends JPanel {
             l.onSubmit(data);
     }
 
+    /**
+     * Gets all the data in the fields as a <code>SettingsData</code> instance.
+     *
+     * @return The <code>SettingsData</code> instance with the values in the fields.
+     */
     public SettingsData getData() {
         SettingsData data = new SettingsData();
 
@@ -237,6 +256,11 @@ public class ContinuousSettings extends JPanel {
         return data;
     }
 
+    /**
+     * Sets the values in the fields to the values in <code>data</code>.
+     *
+     * @param data The data to set.
+     */
     public void setData(SettingsData data) {
         functionTextField.setText(data.function);
         startSpinner.setValue(data.start);
@@ -253,6 +277,9 @@ public class ContinuousSettings extends JPanel {
         }
     }
 
+    /**
+     * Updates whether the outliers section is disabled or not.
+     */
     private void updateOutliersGUI() {
         outlierEnabled = outlierCheckbox.isSelected();
 
@@ -263,6 +290,9 @@ public class ContinuousSettings extends JPanel {
         outlierScaleSpinner.setEnabled(outlierEnabled);
     }
 
+    /**
+     * A class to store the settings values.
+     */
     public static class SettingsData {
         public String function;
         public double start;
