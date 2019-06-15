@@ -30,10 +30,10 @@ public class DynamicSpinnerNumberModel<T extends Number> extends SpinnerNumberMo
 
         tempMin = this.minimumValue.doubleValue();
         tempMax = this.maximumValue.doubleValue();
-        tempOther = value.doubleValue();
+        tempOther = number.doubleValue();
 
         // The new value is between the range
-        return tempMin < tempOther && tempOther < tempMax;
+        return tempMin <= tempOther && tempOther <= tempMax;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class DynamicSpinnerNumberModel<T extends Number> extends SpinnerNumberMo
 
     @Override
     public void setValue(Object value) {
-        if (inRange((T) value)) {
+        if (inRange((T) value) && !((T) value).equals(this.value)) {
             this.value = (T) value;
 
             fireChangeListeners();

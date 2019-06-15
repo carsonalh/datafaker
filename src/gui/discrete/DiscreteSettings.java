@@ -54,7 +54,7 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
         rangeStartSpinner.setModel(new SpinnerNumberModel(0, 0, 1e7, .1));
         rangeStrideSpinner.setModel(new SpinnerNumberModel(1, 0, 1e7, .1));
         sigmaXSpinner.setModel(new SpinnerNumberModel(1, 0, 1e7, .1));
-        centerSpinner.setModel(new DynamicSpinnerNumberModel<Double>(0.0, 0.0, 10.0, 0.01));
+        centerSpinner.setModel(new DynamicSpinnerNumberModel<Double>(0.0, 0.0, 10.0, 0.1));
 
         // Set the spinners to the default values
         DiscreteGenerator g = new DiscreteGenerator();

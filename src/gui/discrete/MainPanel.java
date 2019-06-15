@@ -86,6 +86,8 @@ public class MainPanel extends DataTab {
         generator.setCenter(data.center);
         generator.setCount(data.count);
 
+        updateCenter(generator);
+
         this.data = generator.genData();
         discreteGraph.setData(this.data);
     }
