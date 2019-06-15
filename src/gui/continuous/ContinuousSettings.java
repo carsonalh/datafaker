@@ -9,6 +9,7 @@ import java.util.ArrayList;
 /**
  * A GUI class for changing the settings regarding continuous data generation.
  */
+@SuppressWarnings("ALL")
 public class ContinuousSettings extends JPanel {
 
     private final ArrayList<Listener<SettingsData>> listeners = new ArrayList<>();
@@ -251,7 +252,7 @@ public class ContinuousSettings extends JPanel {
         data.stride = (Double) strideSpinner.getValue();
         data.sigmaX = (Double) sigmaXSpinner.getValue();
         data.sigmaY = (Double) sigmaYSpinner.getValue();
-        data.outliersEnabled = Boolean.valueOf(outlierCheckbox.isSelected());
+        data.outliersEnabled = outlierCheckbox.isSelected();
         data.outlierCount = (Integer) outlierCountSpinner.getValue();
         data.outlierScale = (Double) outlierScaleSpinner.getValue();
 

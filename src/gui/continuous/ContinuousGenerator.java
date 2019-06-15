@@ -11,11 +11,11 @@ import java.util.Random;
 public class ContinuousGenerator extends DataGenerator<Double> {
 
     private Function function;
-    private double start = 0;
-    private int count = 10;
-    private double stride = 1;
-    private double sigmaX = 1;
-    private double sigmaY = 1;
+    private double start;
+    private int count;
+    private double stride;
+    private double sigmaX;
+    private double sigmaY;
     private int outlierCount;
     private double outlierScale;
 

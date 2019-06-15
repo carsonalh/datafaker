@@ -20,7 +20,7 @@ public class FunctionLoader {
      *
      * @param filename The filename of the file to read from.
      * @return The <code>Function</code> object.
-     * @throws IOException
+     * @throws IOException Thrown if there is a problem reading the file.
      */
     public static Function loadFromFile(String filename) throws IOException {
         FileReader reader = new FileReader(filename);
@@ -42,7 +42,7 @@ public class FunctionLoader {
      *
      * @param s The string version of the function.
      * @return The <code>Function</code> object.
-     * @throws UnknownFunctionOrVariableException
+     * @throws UnknownFunctionOrVariableException Thrown if the function can't be read.
      */
     public static Function loadFromString(String s) throws UnknownFunctionOrVariableException {
         Expression calc;
@@ -51,7 +51,7 @@ public class FunctionLoader {
                 .variable(FUNC_VAR_NAME)
                 .build();
 
-        Function function = x -> {
+        return x -> {
             calc.setVariable(FUNC_VAR_NAME, x);
 
             Double result;
@@ -63,8 +63,6 @@ public class FunctionLoader {
 
             return result;
         };
-
-        return function;
     }
 
 }

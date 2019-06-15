@@ -9,6 +9,7 @@ import java.awt.*;
 /**
  * A GUI component for modifying the discrete settings and the discrete graph.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData> {
 
     private static final int SPINNER_WIDTH = 200;
@@ -54,7 +55,7 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
         rangeStartSpinner.setModel(new SpinnerNumberModel(0, 0, 1e7, .1));
         rangeStrideSpinner.setModel(new SpinnerNumberModel(1, 0, 1e7, .1));
         sigmaXSpinner.setModel(new SpinnerNumberModel(1, 0, 1e7, .1));
-        centerSpinner.setModel(new DynamicSpinnerNumberModel<Double>(0.0, 0.0, 10.0, 0.1));
+        centerSpinner.setModel(new DynamicSpinnerNumberModel<>(0.0, 0.0, 10.0, 0.1));
 
         // Set the spinners to the default values
         DiscreteGenerator g = new DiscreteGenerator();
@@ -177,6 +178,7 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
      * @param start The start of the range.
      * @param end   The end of the range.
      */
+    @SuppressWarnings("unchecked")
     public void setCenterRange(double start, double end) {
         if (end < start)
             return;

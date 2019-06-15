@@ -9,6 +9,7 @@ import java.util.ArrayList;
 /**
  * The button panel for options concerning reseeding data, saving data, and opening all the options.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class ButtonPanel extends JPanel {
 
     private final JButton saveButton;
@@ -19,6 +20,7 @@ public class ButtonPanel extends JPanel {
     private final ArrayList<Listener<Void>> reseedListeners = new ArrayList<>();
     private final ArrayList<Listener<Void>> moreOptionsListeners = new ArrayList<>();
 
+    @SuppressWarnings("unchecked")
     public ButtonPanel() {
         super();
 
@@ -30,6 +32,7 @@ public class ButtonPanel extends JPanel {
         // Setup
         saveButton.addActionListener(e -> {
             for (Listener l : saveListeners)
+                //noinspection unchecked
                 l.onSubmit(null);
         });
 

@@ -13,6 +13,7 @@ import java.awt.*;
 /**
  * The main panel of the continuous tab.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class MainPanel extends DataTab {
 
     private static final Dimension SIZE = new Dimension(800, 600);

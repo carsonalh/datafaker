@@ -20,6 +20,7 @@ public abstract class DataGenerator<T extends Number> {
      *
      * @param count The number of data points that will be generated.
      */
+    @SuppressWarnings("unchecked")
     protected DataGenerator(int count) {
         this.count = count;
         data = (T[][]) Array.newInstance(Number.class, this.count, 2);

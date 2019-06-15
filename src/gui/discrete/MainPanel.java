@@ -10,6 +10,7 @@ import java.awt.*;
 /**
  * The panel for making discrete data.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class MainPanel extends DataTab {
 
     private ButtonPanel buttonPanel;
@@ -82,7 +83,7 @@ public class MainPanel extends DataTab {
             DiscreteOptions options = DiscreteOptions.valueOf(settingsForm.getData());
             DiscreteOptionsTable table = new DiscreteOptionsTable(options);
             moreOptionsFrame = new MoreOptionsFrame<>(table);
-            moreOptionsFrame.addOptionsListener(data -> updateData(data));
+            moreOptionsFrame.addOptionsListener(this::updateData);
             moreOptionsFrame.addCloseListener(data -> MainPanel.this.moreOptionsFrame = null);
         }
     }

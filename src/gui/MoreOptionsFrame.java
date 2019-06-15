@@ -14,6 +14,7 @@ import java.util.ArrayList;
  *
  * @param <OptionClass> The type of options to send / listen for.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class MoreOptionsFrame<OptionClass, Table extends MoreOptionsTable<OptionClass>> extends JFrame {
 
     private static final Dimension SIZE = new Dimension(400, 600);
@@ -108,6 +109,7 @@ public class MoreOptionsFrame<OptionClass, Table extends MoreOptionsTable<Option
      * Fired when the window closes. Fires all the <code>Listener&lt;Void&gt;</code> instances
      * in the <code>closeListeners</code> <code>ArrayList</code>.
      */
+    @SuppressWarnings("unchecked")
     private void close() {
         for (Listener l : closeListeners)
             l.onSubmit(null);
@@ -127,6 +129,7 @@ public class MoreOptionsFrame<OptionClass, Table extends MoreOptionsTable<Option
     /**
      * Fired when the data needs to be submitted.
      */
+    @SuppressWarnings("unchecked")
     private void submitData() {
         OptionClass options = getData();
 

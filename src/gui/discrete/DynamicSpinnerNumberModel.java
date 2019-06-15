@@ -7,6 +7,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
 
+@SuppressWarnings("ALL")
 public class DynamicSpinnerNumberModel<T extends Number> extends SpinnerNumberModel {
 
     private ArrayList<ChangeListener> changeListeners;
@@ -43,7 +44,7 @@ public class DynamicSpinnerNumberModel<T extends Number> extends SpinnerNumberMo
 
     @Override
     public void setValue(Object value) {
-        if (inRange((T) value) && !((T) value).equals(this.value)) {
+        if (inRange((T) value) && !value.equals(this.value)) {
             this.value = (T) value;
 
             fireChangeListeners();

@@ -16,7 +16,7 @@ public class DiscreteGraph extends GraphPanel {
     /**
      * Constructs a new <code>DiscreteGraph</code> instance.
      *
-     * @param data
+     * @param data The data to display.
      */
     public DiscreteGraph(Double[][] data) {
         super();
@@ -24,6 +24,7 @@ public class DiscreteGraph extends GraphPanel {
         this.data = data;
     }
 
+    @SuppressWarnings("UnnecessaryLocalVariable")
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -45,7 +46,7 @@ public class DiscreteGraph extends GraphPanel {
             return;
 
         final int rangeColumnWidth = WINDOW_SIZE.width / data.length;
-        final double yRatio = WINDOW_SIZE.height / (double) maxColumn;
+        final double yRatio = WINDOW_SIZE.height / maxColumn;
 
         for (int i = 0; i < data.length; i++) {
             int x = rangeColumnWidth * i;

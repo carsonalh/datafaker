@@ -43,7 +43,7 @@ public class CSVWriter<T> {
     /**
      * Writes the data to the given file.
      *
-     * @throws IOException
+     * @throws IOException Thrown if there is a problem writing the data.
      */
     public void write() throws IOException {
         if (data == null)
