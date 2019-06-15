@@ -93,12 +93,12 @@ public class MainPanel extends DataTab {
     }
 
     private void updateCenter(DiscreteSettings.SettingsData data) {
-        double rangeEnd = data.rangeStart + (data.rangeCount + 1) * data.rangeStride;
+        double rangeEnd = data.rangeStart + data.rangeCount * data.rangeStride;
         settingsForm.setCenterRange(data.rangeStart - data.sigmaX, rangeEnd + data.sigmaX);
     }
 
     private void updateCenter(DiscreteGenerator generator) {
-        double rangeEnd = generator.getRangeStart() + (generator.getRangeCount() + 1) * generator.getRangeStride();
+        double rangeEnd = generator.getRangeStart() + generator.getRangeCount() * generator.getRangeStride();
         settingsForm.setCenterRange(generator.getRangeStart() - generator.getSigmaX(), rangeEnd + generator.getSigmaX());
     }
 
