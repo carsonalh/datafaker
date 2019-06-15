@@ -4,6 +4,7 @@ import function.Function;
 import function.FunctionLoader;
 import gui.ButtonPanel;
 import gui.DataTab;
+import gui.MoreOptionsFrame;
 import net.objecthunter.exp4j.tokenizer.UnknownFunctionOrVariableException;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ public class MainPanel extends DataTab {
     private final ContinuousSettings settingsForm;
     private final ContinuousGraph graphPanel;
     private final ButtonPanel buttonPanel;
-    private MoreOptionsFrame moreOptionsFrame;
+    private MoreOptionsFrame<ContinuousOptions, ContinuousOptionsTable> moreOptionsFrame;
 
     private ContinuousGenerator generator;
 
@@ -146,8 +147,10 @@ public class MainPanel extends DataTab {
 
     private void openMoreOptionsFrame() {
         if (moreOptionsFrame == null) {
-            moreOptionsFrame = new MoreOptionsFrame(ContinuousOptions.valueOf(settingsForm.getData()));
-            moreOptionsFrame.addContinuousOptionsListener(this::updateData);
+            ContinuousOptionsTable table = new ContinuousOptionsTable();
+            ContinuousOptions options = ContinuousOptions.valueOf(settingsForm.getData());
+            moreOptionsFrame = new MoreOptionsFrame<>(table, options);
+            moreOptionsFrame.addOptionsListener(this::updateData);
             moreOptionsFrame.addCloseListener(data -> MainPanel.this.moreOptionsFrame = null);
         }
     }

@@ -85,7 +85,7 @@ public class ContinuousSettings extends JPanel {
         strideSpinner.addChangeListener(e -> this.update());
         sigmaXSpinner.addChangeListener(e -> this.update());
         sigmaYSpinner.addChangeListener(e -> this.update());
-        outlierCheckbox.addChangeListener(e -> this.update());
+        outlierCheckbox.addActionListener(e -> this.update());
         outlierCountSpinner.addChangeListener(e -> this.update());
         outlierScaleSpinner.addChangeListener(e -> this.update());
 
@@ -251,7 +251,7 @@ public class ContinuousSettings extends JPanel {
         data.stride = (Double) strideSpinner.getValue();
         data.sigmaX = (Double) sigmaXSpinner.getValue();
         data.sigmaY = (Double) sigmaYSpinner.getValue();
-        data.outliersEnabled = outlierCheckbox.isSelected();
+        data.outliersEnabled = Boolean.valueOf(outlierCheckbox.isSelected());
         data.outlierCount = (Integer) outlierCountSpinner.getValue();
         data.outlierScale = (Double) outlierScaleSpinner.getValue();
 

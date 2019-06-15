@@ -1,4 +1,4 @@
-package gui.continuous;
+package gui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -9,10 +9,10 @@ import javax.swing.table.TableModel;
 /**
  * A table to edit all the fields in the application.
  */
-public class MoreOptionsTable extends JTable {
+public abstract class MoreOptionsTable<OptionClass> extends JTable {
 
-    private static final String[] COLUMNS = new String[]{"Field", "Value"};
-    private static final Object[][] DEFAULT_DATA = {
+    private static String[] COLUMNS = new String[]{"Field", "Value"};
+    private static Object[][] DEFAULT_DATA = {
             {"Function", "x^2", String.class},
             {"Start", 0.0, Double.class},
             {"Count", 0, Integer.class},
@@ -23,19 +23,20 @@ public class MoreOptionsTable extends JTable {
             {"One Every", 0, Integer.class},
             {"Scale", 0.0, Double.class},
     };
+
+    protected Object[][] data;
     private Class editingClass = null;
-    private Object[][] data;
 
     /**
      * Constructs a new <code>MoreOptionsTable</code> instance.
      */
     public MoreOptionsTable() {
-        super(new MoreOptionsTableModel(getDisplayData(), COLUMNS));
+        super(new MoreOptionsTableModel(getDisplayData(DEFAULT_DATA), COLUMNS));
 
         getTableHeader().setReorderingAllowed(false);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        data = getDisplayData();
+        data = getDisplayData(DEFAULT_DATA);
     }
 
     /**
@@ -44,20 +45,10 @@ public class MoreOptionsTable extends JTable {
      *
      * @param options The options to pass.
      */
-    public MoreOptionsTable(ContinuousOptions options) {
+    public MoreOptionsTable(OptionClass options) {
         this();
 
-        data[0][1] = options.function; // Function
-        data[1][1] = options.start; // Start
-        data[2][1] = options.count; // Count
-        data[3][1] = options.stride; // Stride
-        data[4][1] = options.sigmaX; // Sigma X
-        data[5][1] = options.sigmaY; // Sigma Y
-        data[6][1] = options.outlierCount != 0; // Outliers
-        data[7][1] = options.outlierCount; // One Every
-        data[8][1] = options.outlierScale; // Scale
-
-        updateModel();
+        setOptions(options);
     }
 
     /**
@@ -66,12 +57,12 @@ public class MoreOptionsTable extends JTable {
      *
      * @return The 2D array containing all the data to be put into the cells of the table.
      */
-    private static Object[][] getDisplayData() {
-        Object[][] displayData = new Object[DEFAULT_DATA.length][2];
+    protected static Object[][] getDisplayData(Object[][] data) {
+        Object[][] displayData = new Object[data.length][2];
 
-        for (int i = 0; i < DEFAULT_DATA.length; i++) {
-            displayData[i][0] = DEFAULT_DATA[i][0];
-            displayData[i][1] = DEFAULT_DATA[i][1];
+        for (int i = 0; i < data.length; i++) {
+            displayData[i][0] = data[i][0];
+            displayData[i][1] = data[i][1];
         }
 
         return displayData;
@@ -79,34 +70,28 @@ public class MoreOptionsTable extends JTable {
 
     /**
      * Returns the options that are currently in the fields.
+     *
      * @return The options that are currently in the fields.
      */
-    public ContinuousOptions getOptions() {
-        ContinuousOptions options = new ContinuousOptions();
-        TableModel model = getModel();
-
-        options.function = (String) model.getValueAt(0, 1);
-        options.start = (Double) model.getValueAt(1, 1);
-        options.count = (Integer) model.getValueAt(2, 1);
-        options.stride = (Double) model.getValueAt(3, 1);
-        options.sigmaX = (Double) model.getValueAt(4, 1);
-        options.sigmaY = (Double) model.getValueAt(5, 1);
-        options.outliersEnabled = (Boolean) model.getValueAt(6, 1);
-        options.outlierCount = (Integer) model.getValueAt(7, 1);
-        options.outlierScale = (Double) model.getValueAt(8, 1);
-
-        return options;
-    }
+    public abstract OptionClass getOptions();
 
     /**
-     * Copys the values from the <code>data</code> array into the table model.
+     * Sets the options in the fields to the given parameter <code>options</code>.
+     *
+     * @param options The options to set.
      */
-    private void updateModel() {
-        TableModel model = getModel();
+    public abstract void setOptions(OptionClass options);
 
+    /**
+     * Copies the values from the <code>data</code> array into the table model.
+     */
+    protected void updateModel() {
+        TableModel tableModel = getModel();
+
+        // Set the table model data to "this.data"
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
-                model.setValueAt(data[i][j], i, j);
+                tableModel.setValueAt(data[i][j], i, j);
             }
         }
     }
@@ -115,7 +100,8 @@ public class MoreOptionsTable extends JTable {
     public TableCellRenderer getCellRenderer(int row, int column) {
         editingClass = null;
 
-        Class cellClass = getModel().getValueAt(row, column).getClass();
+        TableModel model = getModel();
+        Class cellClass = model.getValueAt(row, column).getClass();
         return getDefaultRenderer(cellClass);
     }
 

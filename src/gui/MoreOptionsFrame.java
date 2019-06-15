@@ -1,5 +1,6 @@
-package gui.continuous;
+package gui;
 
+import com.sun.istack.internal.NotNull;
 import general.Listener;
 
 import javax.swing.*;
@@ -10,18 +11,20 @@ import java.util.ArrayList;
 
 /**
  * The "more options" frame of the application. Has all the settings that are available.
+ *
+ * @param <OptionClass> The type of options to send / listen for.
  */
-public class MoreOptionsFrame extends JFrame {
+public class MoreOptionsFrame<OptionClass, Table extends MoreOptionsTable<OptionClass>> extends JFrame {
 
     private static final Dimension SIZE = new Dimension(400, 600);
-    private static final String TITLE = "More Options";
+    private static final String TITLE = "More OptionClass";
 
-    private final MoreOptionsTable table;
+    private final Table table;
     private final JScrollPane tableContainer;
     private final JButton submitButton;
     private final JButton closeButton;
 
-    private final ArrayList<Listener<ContinuousOptions>> continuousOptionsListeners;
+    private final ArrayList<Listener<OptionClass>> optionsListeners;
     private final ArrayList<Listener<Void>> closeListeners;
 
     /**
@@ -29,21 +32,22 @@ public class MoreOptionsFrame extends JFrame {
      *
      * @param options The options the fields are set to by default.
      */
-    public MoreOptionsFrame(ContinuousOptions options) {
+    public MoreOptionsFrame(@NotNull Table table, OptionClass options) {
         super();
 
         // Creation
-        if (options == null)
-            table = new MoreOptionsTable();
-        else
-            table = new MoreOptionsTable(options);
+        if (options != null) {
+            table.setOptions(options);
+        }
+
+        this.table = table;
 
         tableContainer = new JScrollPane(table);
         submitButton = new JButton("Save");
         closeButton = new JButton("Close");
 
         closeListeners = new ArrayList<>();
-        continuousOptionsListeners = new ArrayList<>();
+        optionsListeners = new ArrayList<>();
 
         // Setup
         submitButton.addActionListener(e -> submitData());
@@ -107,13 +111,6 @@ public class MoreOptionsFrame extends JFrame {
     }
 
     /**
-     * Constructs a <code>MoreOptionsFrame</code> instance.
-     */
-    public MoreOptionsFrame() {
-        this(null);
-    }
-
-    /**
      * Fired when the window closes. Fires all the <code>Listener&lt;Void&gt;</code> instances
      * in the <code>closeListeners</code> <code>ArrayList</code>.
      */
@@ -137,26 +134,28 @@ public class MoreOptionsFrame extends JFrame {
      * Fired when the data needs to be submitted.
      */
     private void submitData() {
-        ContinuousOptions options = getData();
+        OptionClass options = getData();
 
-        for (Listener l : continuousOptionsListeners)
+        for (Listener l : optionsListeners)
             l.onSubmit(options);
     }
 
     /**
      * Gets the data in the fields.
+     *
      * @return The data in the fields.
      */
-    private ContinuousOptions getData() {
+    private OptionClass getData() {
         return table.getOptions();
     }
 
     /**
      * Adds a listener for when the field values are saved.
+     *
      * @param l The listener to add.
      */
-    public void addContinuousOptionsListener(Listener<ContinuousOptions> l) {
-        continuousOptionsListeners.add(l);
+    public void addOptionsListener(Listener<OptionClass> l) {
+        optionsListeners.add(l);
     }
 
 }
