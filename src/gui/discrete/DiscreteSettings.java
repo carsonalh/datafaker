@@ -196,16 +196,26 @@ public class DiscreteSettings extends SettingsForm<DiscreteSettings.SettingsData
         listeners.add(l);
     }
 
-    private SettingsData getData() {
+    public SettingsData getData() {
         SettingsData data = new SettingsData();
+
         data.count = (Integer) countSpinner.getValue();
         data.rangeCount = (Integer) rangeCountSpinner.getValue();
         data.rangeStart = (Double) rangeStartSpinner.getValue();
         data.rangeStride = (Double) rangeStrideSpinner.getValue();
-        data.center = (Double) centerSpinner.getValue();
         data.sigmaX = (Double) sigmaXSpinner.getValue();
+        data.center = (Double) centerSpinner.getValue();
 
         return data;
+    }
+
+    public void setData(SettingsData data) {
+        countSpinner.setValue(data.count);
+        rangeCountSpinner.setValue(data.rangeCount);
+        rangeStartSpinner.setValue(data.rangeStart);
+        rangeStrideSpinner.setValue(data.rangeStride);
+        sigmaXSpinner.setValue(data.sigmaX);
+        centerSpinner.setValue(data.center);
     }
 
     public static class SettingsData {

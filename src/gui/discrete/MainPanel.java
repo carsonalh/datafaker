@@ -2,6 +2,7 @@ package gui.discrete;
 
 import gui.ButtonPanel;
 import gui.DataTab;
+import gui.MoreOptionsFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,8 @@ public class MainPanel extends DataTab {
     private ButtonPanel buttonPanel;
     private DiscreteSettings settingsForm;
     private DiscreteGraph discreteGraph;
+
+    private MoreOptionsFrame<DiscreteOptions, DiscreteOptionsTable> moreOptionsFrame;
 
     private DiscreteGenerator generator;
 
@@ -32,6 +35,7 @@ public class MainPanel extends DataTab {
         settingsForm.addListener(this::updateGraph);
         buttonPanel.addReseedListener(data -> reseedData());
         buttonPanel.addSaveListener(data -> saveData());
+        buttonPanel.addMoreOptionsListener(data -> openMoreOptionsFrame());
 
         discreteGraph.setBorder(BorderFactory.createEtchedBorder());
 
@@ -71,6 +75,27 @@ public class MainPanel extends DataTab {
         c.weighty = 1;
 
         add(buttonPanel, c);
+    }
+
+    private void openMoreOptionsFrame() {
+        if (moreOptionsFrame == null) {
+            DiscreteOptions options = DiscreteOptions.valueOf(settingsForm.getData());
+            DiscreteOptionsTable table = new DiscreteOptionsTable(options);
+            moreOptionsFrame = new MoreOptionsFrame<>(table);
+            moreOptionsFrame.addOptionsListener(data -> updateData(data));
+            moreOptionsFrame.addCloseListener(data -> MainPanel.this.moreOptionsFrame = null);
+        }
+    }
+
+    private void updateData(DiscreteOptions data) {
+        settingsForm.setData(data);
+
+        generator.setCount(data.count);
+        generator.setRangeCount(data.rangeCount);
+        generator.setRangeStart(data.rangeStart);
+        generator.setRangeStride(data.rangeStride);
+        generator.setSigmaX(data.sigmaX);
+        generator.setCenter(data.center);
     }
 
     public void reseedData() {

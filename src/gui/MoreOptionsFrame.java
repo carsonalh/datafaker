@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class MoreOptionsFrame<OptionClass, Table extends MoreOptionsTable<OptionClass>> extends JFrame {
 
     private static final Dimension SIZE = new Dimension(400, 600);
-    private static final String TITLE = "More OptionClass";
+    private static final String TITLE = "More Options";
 
     private final Table table;
     private final JScrollPane tableContainer;
@@ -29,17 +29,11 @@ public class MoreOptionsFrame<OptionClass, Table extends MoreOptionsTable<Option
 
     /**
      * Constructs a <code>MoreOptionsFrame</code> instance.
-     *
-     * @param options The options the fields are set to by default.
      */
-    public MoreOptionsFrame(@NotNull Table table, OptionClass options) {
+    public MoreOptionsFrame(@NotNull Table table) {
         super();
 
         // Creation
-        if (options != null) {
-            table.setOptions(options);
-        }
-
         this.table = table;
 
         tableContainer = new JScrollPane(table);

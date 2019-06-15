@@ -30,6 +30,9 @@ public class DiscreteGraph extends GraphPanel {
 
         g.clearRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height);
 
+        if (data == null)
+            return;
+
         Double maxColumn = 0d;
 
         for (Double[] range : data) {

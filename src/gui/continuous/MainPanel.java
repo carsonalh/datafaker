@@ -100,8 +100,6 @@ public class MainPanel extends DataTab {
         if (data == null)
             return;
 
-        settingsForm.setData(data);
-
         Function f;
 
         try {
@@ -147,9 +145,9 @@ public class MainPanel extends DataTab {
 
     private void openMoreOptionsFrame() {
         if (moreOptionsFrame == null) {
-            ContinuousOptionsTable table = new ContinuousOptionsTable();
             ContinuousOptions options = ContinuousOptions.valueOf(settingsForm.getData());
-            moreOptionsFrame = new MoreOptionsFrame<>(table, options);
+            ContinuousOptionsTable table = new ContinuousOptionsTable(options);
+            moreOptionsFrame = new MoreOptionsFrame<>(table);
             moreOptionsFrame.addOptionsListener(this::updateData);
             moreOptionsFrame.addCloseListener(data -> MainPanel.this.moreOptionsFrame = null);
         }

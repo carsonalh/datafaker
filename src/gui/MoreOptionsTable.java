@@ -37,6 +37,8 @@ public abstract class MoreOptionsTable<OptionClass> extends JTable {
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         data = getDisplayData(DEFAULT_DATA);
+
+        updateModel();
     }
 
     /**
@@ -49,6 +51,8 @@ public abstract class MoreOptionsTable<OptionClass> extends JTable {
         this();
 
         setOptions(options);
+
+        updateModel();
     }
 
     /**
@@ -94,6 +98,12 @@ public abstract class MoreOptionsTable<OptionClass> extends JTable {
                 tableModel.setValueAt(data[i][j], i, j);
             }
         }
+
+        adjustRowCount();
+    }
+
+    protected void adjustRowCount() {
+        ((DefaultTableModel) getModel()).setRowCount(data.length);
     }
 
     @Override
@@ -122,7 +132,7 @@ public abstract class MoreOptionsTable<OptionClass> extends JTable {
         return editingClass != null ? editingClass : super.getColumnClass(column);
     }
 
-    private static class MoreOptionsTableModel extends DefaultTableModel {
+    protected static class MoreOptionsTableModel extends DefaultTableModel {
         public MoreOptionsTableModel(Object[][] data, Object[] columnNames) {
             super(data, columnNames);
         }
